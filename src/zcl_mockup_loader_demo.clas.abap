@@ -22,7 +22,11 @@ CLASS ZCL_MOCKUP_LOADER_DEMO IMPLEMENTATION.
   method sum_of_doc_lines.
 
     loop at it_tab assigning field-symbol(<i>).
-      rv_sum = rv_sum + <i>-dmbtr.
+      if <i>-shkzg = 'S'.             " Debit (positive)
+        rv_sum = rv_sum + <i>-dmbtr.
+      elseif <i>-shkzg = 'H'.         " Credit (negative)
+        rv_sum = rv_sum - <i>-dmbtr.
+      endif.
     endloop.
 
   endmethod.
